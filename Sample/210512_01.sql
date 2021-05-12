@@ -38,3 +38,47 @@ SELECT name, height, addr FROM userTbl
 
 SELECT name, height, addr FROM userTbl
   WHERE name LIKE '_용_';
+
+--SubQuery
+-- 키가 175보다 큰사람들 조회
+SELECT * FROM userTBL
+  WHERE height > 175;
+
+-- 김경호보다 키가 큰사람을 조회
+SELECT * FROM userTbl
+  WHERE height > (SELECT height FROM userTbl WHERE name = '김경호');
+
+-- 경남에 사는 사람들보다 키가 큰 사람들 조회
+SELECT * FROM userTbl
+  WHERE height > ANY (SELECT height FROM userTbl Where addr = '경남');
+
+-- IN은 서브쿼리에서 나온 결과와 일치하는 결과만 조회
+SELECT * FROM userTbl
+  WHERE height = ANY (SELECT height FROM userTbl Where addr = '경남');
+
+SELECT * FROM userTbl
+  WHERE height IN (SELECT height FROM userTbl Where addr = '경남');
+
+-- ****subquery에서는 select * 이 없다.
+
+-- ORDER BY
+SELECT * FROM userTbl
+  ORDER BY userID DESC;
+
+SELECT * FROM userTbl
+  ORDER BY birthYear ASC;
+
+SELECT * FROM userTbl
+  ORDER BY height DESC, name DESC;
+
+-- mobile1으로 오름차순 뒤 같은값이면 mobile2로 내림차순
+SELECT * FROM userTbl
+  ORDER BY mobile1 ASC, mobile2 DESC;
+
+ 
+-- userTbl에 몇개의 데이터(레코드)가 있는지 확인
+SELECT COUNT(*) FROM userTbl;
+SELECT COUNT(*) FROM buyTbl;
+
+--DISTINCT (중복제거)
+SELECT DISTINCT addr FROM userTbl;
