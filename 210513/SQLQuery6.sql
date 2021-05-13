@@ -1,0 +1,7 @@
+-- ХыЧе
+BEGIN TRAN;
+
+--
+SELECT * FROM testTbl;
+COMMIT;
+ROLLBACK;
